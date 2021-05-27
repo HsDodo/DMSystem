@@ -74,7 +74,7 @@
 <div id="login-box">
     <h1>Login</h1>
     <div class="form">
-        <form method="post" name="form1" action="${pageContext.request.contextPath}/StudentLoginServlet">
+        <form method="post" name="form1">
             <div class="item">
                 <i>用户名</i>
                 <input type="text" placeholder="username" name="username"  >
@@ -104,12 +104,12 @@
             return false;
         }
         if(n==1){
+            form.action="${pageContext.request.contextPath}/StudentLoginServlet";
             form.submit();
         }else{
-            form.action="AdminLoginServlet";
+            form.action="${pageContext.request.contextPath}/AdminLoginServlet";
             form.submit();
         }
-
     }
 </script>
 

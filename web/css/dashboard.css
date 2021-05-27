@@ -32,7 +32,23 @@ body {
 /* Hide for mobile, show later */
 .sidebar {
   display: none;
+  border-right: 5px solid #c7ebe3 !important;
 }
+
+.navbar,
+.navbar-inverse,
+.navbar-fixed-top{
+  background-color: #364b3e;
+}
+
+
+
+
+
+
+
+
+
 @media (min-width: 768px) {
   .sidebar {
     position: fixed;
@@ -48,6 +64,9 @@ body {
     border-right: 1px solid #eee;
   }
 }
+
+
+
 
 /* Sidebar navigation */
 .nav-sidebar {

@@ -1,11 +1,4 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: 蘑菇先生
-  Date: 2020/12/21
-  Time: 15:45
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -70,7 +63,6 @@
         <div class="col-sm-3 col-md-2 sidebar hidden-xs">
             <ul class="nav nav-sidebar">
                 <li><a href="admin_student_information.jsp">宿舍信息 </a></li>
-                <li><a href="admin_student_expess.jsp">快件信息</a></li>
                 <li><a href="admin_student_guarantee.jsp">维修信息</a></li>
                 <li><a href="admin_student_leavereturn.jsp">学生离校与返校</a></li>
                 <li class="active"><a href="admin_student_laterecord.jsp">晚归记录</a></li>
@@ -79,7 +71,6 @@
         </div>
         <div class="visible-xs">
             <li><a href="admin_student_information.jsp">宿舍信息</a></li>
-            <li><a href="admin_student_expess.jsp">快件信息</a></li>
             <li><a href="admin_student_guarantee.jsp">维修信息</a></li>
             <li><a href="admin_student_leavereturn.jsp">学生离校与返校</a></li>
             <li><a href="admin_student_laterecord.jsp">晚归记录</a></li>

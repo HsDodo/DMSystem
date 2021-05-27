@@ -17,21 +17,17 @@ public class StudentGuaranteeServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setCharacterEncoding("utf-8"); // 设置编码格式
         request.setCharacterEncoding("utf-8");
-
-
-        String dormitoryid = request.getParameter("dormitoryid");
+        String dormitoryid = (String)request.getSession().getAttribute("dormitoryid");
         String studentname = request.getParameter("studentname");
         String goodsname = request.getParameter("goodsname");
         String reason = request.getParameter("reason");
         String phoneid = request.getParameter("phoneid");
-
         guarantee guarantee = new guarantee();
         guarantee.setDormitoryid(dormitoryid);
         guarantee.setStudentname(studentname);
         guarantee.setGoodsname(goodsname);
         guarantee.setReason(reason);
         guarantee.setPhoneid(phoneid);
-
         GuaranteeDao guaranteeDao = new GuaranteeDao();
         ArrayList<guarantee> guarantees = new ArrayList<>();
         try {
