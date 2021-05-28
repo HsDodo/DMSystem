@@ -5,9 +5,27 @@
 /* Move down content because we have a fixed navbar that is 50px tall */
 body {
   padding-top: 50px;
+  height: 800px;
+
 }
 
+#navbar>.nav-pills{
+  float: right;
+}
 
+#navbar .nav-item>.navbar-right{
+  margin-right: 1px;
+  margin-left: 2px;
+  margin-top: 5px;
+}
+
+.icon {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
 /*
  * Global add-ons
  */

@@ -18,7 +18,7 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse ">
 <%--   nav justify-content-end       --%>
-                <ul class="nav justify-content-end">
+                <ul class="nav nav-pills">
                     <li class="nav-item active ">
                         <a class="navbar-right" href="student_information.jsp">正在登陆的用户为：${sessionScope.studentname}(学生)</a>
                     </li>

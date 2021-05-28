@@ -15,6 +15,8 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="css/dashboard.css" rel="stylesheet">
+    <script type="text/javascript"src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="js/click_show_text.js" type="text/javascript"></script>
 </head>
 
 <body>
@@ -22,10 +24,11 @@
     String studentname = (String) request.getSession().getAttribute("studentname");
     if(studentname == null)
     {
-        response.sendRedirect("login.jsp");
+        response.sendRedirect("index.jsp");
     }
 %>
 <jsp:include page="navbar.jsp"></jsp:include>
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar hidden-xs">

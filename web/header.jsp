@@ -28,7 +28,7 @@
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav justify-content-end">
               <li class="nav-item active">
-                <a class="navbar-right" href="login.jsp">登陆</a>
+                <a class="navbar-right" href="index.jsp">登陆</a>
               </li>
             </ul>
           </div>

@@ -53,6 +53,7 @@
                     <table class="table table-striped">
                         <thead>
                         <tr>
+                            <th>订单号</th>
                             <th>宿舍号</th>
                             <th>报修人姓名</th>
                             <th>物品名称</th>
@@ -60,11 +61,13 @@
                             <th>报修人电话号码</th>
                             <th>维修日期</th>
                             <th>维修状态</th>
+                            <th>操作</th>
                         </tr>
                         </thead>
                         <tbody>
                         <c:forEach items="${sessionScope.guarantee}" var="guarantees">
                             <tr>
+                                <td>${guarantees.id}</td>
                                 <td>${guarantees.dormitoryid}</td>
                                 <td>${guarantees.studentname}</td>
                                 <td>${guarantees.goodsname}</td>
@@ -72,6 +75,24 @@
                                 <td>${guarantees.phoneid}</td>
                                 <td>${guarantees.guaranteetime}</td>
                                 <td>${guarantees.guaranteestaus}</td>
+                                <c:set var="guaranteestaus" value="${guarantees.guaranteestaus}"></c:set>
+                                <c:if test="${guaranteestaus == '维修中' }" >
+                                    <td><a href="${pageContext.request.contextPath}/StudentGuaranteeServlet?cancelId=${guarantees.id}">取消</a> </td>
+                                </c:if>
+                                <c:if test="${guaranteestaus == '已维修' }" >
+                                    <td>不可操作 </td>
+                                </c:if>
+
+
+
+<%--                                <c:choose>--%>
+<%--                                    　　 <c:when test="${guaranteestaus == '维修中' }">--%>
+<%--                                            <td><a href="${pageContext.request.contextPath}/StudentGuaranteeServlet?cancelId=${guarantees.id}">取消</a></td>--%>
+<%--                                        </c:when>--%>
+<%--                                    　　 <c:otherwise>--%>
+<%--                                            <td>不可操作</td>--%>
+<%--                                        </c:otherwise>--%>
+<%--                                </c:choose>--%>
                             </tr>
                         </c:forEach>
                         </tbody>

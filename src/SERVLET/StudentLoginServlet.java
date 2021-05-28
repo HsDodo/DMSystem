@@ -26,15 +26,14 @@ public class StudentLoginServlet extends HttpServlet {
             e.printStackTrace();
         }
         StudentDao studentDao = new StudentDao();
-        GuaranteeDao guaranteeDao = new GuaranteeDao();
-        LeavereturnDao leavereturnDao = new LeavereturnDao();
-        LaterecordDao laterecordDao = new LaterecordDao();
-        FeeDao feeDao = new FeeDao();
         try {
             ResultSet rs = studentDao.getStudentById(studentid);//根据登录学号获取学生个体
             if(rs.next()){
                 if(password.equals(rs.getString("password"))){
-
+                    GuaranteeDao guaranteeDao = new GuaranteeDao();
+                    LeavereturnDao leavereturnDao = new LeavereturnDao();
+                    LaterecordDao laterecordDao = new LaterecordDao();
+                    FeeDao feeDao = new FeeDao();
                     response.getWriter().println("登陆成功！");
                     //登陆成功
                     //将用户stu存入session域
@@ -75,11 +74,11 @@ public class StudentLoginServlet extends HttpServlet {
                     request.getRequestDispatcher("student_information.jsp").forward(request,response);
                 }else{
                     request.setAttribute("pwdError","密码不正确!");
-                    request.getRequestDispatcher("login.jsp").forward(request, response);
+                    request.getRequestDispatcher("index.jsp").forward(request, response);
                 }
             }else{
                 request.setAttribute("nameError","用户名不存在!");
-                request.getRequestDispatcher("login.jsp").forward(request, response);
+                request.getRequestDispatcher("index.jsp").forward(request, response);
             }
         } catch (SQLException | ClassNotFoundException throwables) {
             throwables.printStackTrace();

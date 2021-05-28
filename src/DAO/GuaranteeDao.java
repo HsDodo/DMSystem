@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class GuaranteeDao {
-    // 得到所有快件信息
+    // 得到所有报修信息 （管理员）
     public ArrayList<guarantee> getAllguarantee() throws SQLException, ClassNotFoundException {
         ArrayList<guarantee> guarantees = new ArrayList<>();
         Connection conn = DBUtils.getConnection();
@@ -20,6 +20,7 @@ public class GuaranteeDao {
         while (rs.next())
         {
             guarantee guarantee = new guarantee();
+            guarantee.setId(rs.getString("id"));
             guarantee.setStudentname(rs.getString("studentname"));
             guarantee.setDormitoryid(rs.getString("dormitoryid"));
             guarantee.setGoodsname(rs.getString("goodsname"));
@@ -42,10 +43,10 @@ public class GuaranteeDao {
         pstmt.setString(4, guarantee.getGoodsname());
         pstmt.executeUpdate();
     }
-    // 提交修改信息
+    // 提交修改信息 提交报修信息
     public void submit(guarantee guarantee) throws SQLException, ClassNotFoundException {
         Connection conn = DBUtils.getConnection();
-        String sql = "insert into guarantee(dormitoryid,studentname,goodsname,reason,phoneid,guaranteestaus) values(?,?,?,?,?,?)";
+        String sql = "insert into guarantee(dormitoryid,studentname,goodsname,reason,phoneid,guaranteestaus,id) values(?,?,?,?,?,?,?)";
         PreparedStatement pstmt = conn.prepareStatement(sql);
         pstmt.setString(1,guarantee.getDormitoryid());
         pstmt.setString(2,guarantee.getStudentname());
@@ -53,6 +54,7 @@ public class GuaranteeDao {
         pstmt.setString(4,guarantee.getReason());
         pstmt.setString(5,guarantee.getPhoneid());
         pstmt.setString(6,"维修中");
+        pstmt.setString(7,guarantee.getId());
         pstmt.executeUpdate();
     }
 
@@ -67,6 +69,7 @@ public class GuaranteeDao {
         while (rs.next())
         {
             guarantee guarantee = new guarantee();
+            guarantee.setId(rs.getString("id"));
             guarantee.setStudentname(rs.getString("studentname"));
             guarantee.setDormitoryid(rs.getString("dormitoryid"));
             guarantee.setGoodsname(rs.getString("goodsname"));
@@ -78,4 +81,18 @@ public class GuaranteeDao {
         }
         return  guarantees;
     }
+
+
+    public boolean cancelOrder(String cancelId) throws SQLException, ClassNotFoundException {
+        Connection conn = DBUtils.getConnection();
+        String sql = "delete from guarantee where id = ?";
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+        pstmt.setString(1,cancelId);
+        return pstmt.executeUpdate()>0;
+    }
+
+
+
+
+
 }
