@@ -9,6 +9,14 @@ body {
 
 }
 
+
+/*表格高度*/
+.table-responsive{
+  height: 478px;
+}
+
+
+
 #navbar>.nav-pills{
   float: right;
 }

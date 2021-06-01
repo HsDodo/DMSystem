@@ -1,9 +1,7 @@
 package SERVLET;
 
-import DAO.GuaranteeDao;
 import DAO.LeavereturnDao;
-import JAVABEAN.guarantee;
-import JAVABEAN.leavereturn;
+import JAVABEAN.Leavereturn;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -34,14 +32,14 @@ public class StudentLeavereturnServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        leavereturn leavereturn = new leavereturn();
+        Leavereturn leavereturn = new Leavereturn();
         leavereturn.setStudentid(studentid);
         leavereturn.setStudentname(studentname);
         leavereturn.setDormitoryid(dormitoryid);
         leavereturn.setLeavetime(leavetime);
         leavereturn.setReturntime(returntime);
         LeavereturnDao leavereturnDao = new LeavereturnDao();
-        ArrayList<leavereturn> leavereturns = new ArrayList<>();
+        ArrayList<Leavereturn> leavereturns = new ArrayList<>();
         try {
             leavereturnDao.submit(leavereturn);
             leavereturns = leavereturnDao.getLeavereturnsByStudentid(studentid);

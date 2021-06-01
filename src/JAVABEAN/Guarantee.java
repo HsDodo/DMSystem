@@ -2,7 +2,7 @@ package JAVABEAN;
 
 import java.util.Date;
 
-public class guarantee {
+public class Guarantee {
     private String  dormitoryid;
     private String  studentname;
     private String  goodsname;

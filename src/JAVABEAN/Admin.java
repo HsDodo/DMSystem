@@ -1,6 +1,6 @@
 package JAVABEAN;
 
-public class sysadmin {
+public class Admin {
     private int sysadminid;
     private String username;
     private String password;

@@ -2,7 +2,7 @@ package JAVABEAN;
 
 import java.util.Date;
 
-public class leavereturn {
+public class Leavereturn {
     private String studentname;
     private String studentid;
     private String dormitoryid;

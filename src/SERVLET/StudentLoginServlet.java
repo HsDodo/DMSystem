@@ -37,7 +37,7 @@ public class StudentLoginServlet extends HttpServlet {
                     response.getWriter().println("登陆成功！");
                     //登陆成功
                     //将用户stu存入session域
-                    student stu = new student();
+                    Student stu = new Student();
                     stu.setStudentid(studentid);
                     stu.setStudentname(rs.getString("studentname"));
                     stu.setPassword(password);
@@ -46,16 +46,16 @@ public class StudentLoginServlet extends HttpServlet {
                     // 得到宿舍号
                     String  dormitoryid = studentDao.getDormirotyByStudentId(studentid);
                     // 得到同寝室人员
-                    ArrayList<student> students = studentDao.getStudentsByDormitoryid(dormitoryid);
+                    ArrayList<Student> students = studentDao.getStudentsByDormitoryid(dormitoryid);
                     String studentname = studentDao.getStudentNameByStudentId(studentid);
                     // 得到寝室维修信息
-                    ArrayList<guarantee> guarantee = guaranteeDao.getGuaranteesByDormitoryid(dormitoryid);
+                    ArrayList<Guarantee> guarantee = guaranteeDao.getGuaranteesByDormitoryid(dormitoryid);
                     // 得到个人的离校返校信息
-                    ArrayList<leavereturn>  leavereturn = leavereturnDao.getLeavereturnsByStudentid(studentid);
+                    ArrayList<Leavereturn>  leavereturn = leavereturnDao.getLeavereturnsByStudentid(studentid);
                     // 得到个人的晚归记录
-                    ArrayList<laterecord>   laterecord = laterecordDao.getLaterecordsByStudentid(studentid);
+                    ArrayList<Laterecord>   laterecord = laterecordDao.getLaterecordsByStudentid(studentid);
                     // 得到寝室的水电费信息
-                    ArrayList<fee>  fee = feeDao.getFeesByDormitoryid(dormitoryid);
+                    ArrayList<Fee>  fee = feeDao.getFeesByDormitoryid(dormitoryid);
                     request.getSession().setAttribute("dormitoryid",dormitoryid);
                     request.getSession().setAttribute("students",students);
                     request.getSession().setAttribute("studentname",studentname);

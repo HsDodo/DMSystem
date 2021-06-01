@@ -34,20 +34,24 @@
           </div>
         </c:if>
         <!-- 学生-->
-        <c:if test="${sessionScope.studentname != null}">
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav justify-content-end">
-            <li class="nav-item active">
-              <a class="navbar-right" href="student_information.jsp">正在登陆的用户为：${sessionScope.studentname}(学生)</a>
-            </li>
-            <li class="nav-item active">
-              <a class="navbar-right" href="/" onclick="return logout()">退出</a>
-            </li>
-          </ul>
-        </div>
-        </c:if>
+        <%
+          String studentname = (String)request.getSession().getAttribute("studentname");
+          if(!studentname.equals("")){
+        %>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav justify-content-end">
+              <li class="nav-item active">
+                <a class="navbar-right" href="student_information.jsp">正在登陆的用户为：${sessionScope.studentname}(学生)</a>
+              </li>
+              <li class="nav-item active">
+                <a class="navbar-right" href="/" onclick="return logout()">退出</a>
+              </li>
+            </ul>
+          </div>
+        <%
+          }else{
+        %>
         <!-- 管理员-->
-        <c:if test="${sessionScope.dormadminname != null}">
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav justify-content-end">
               <li class="nav-item active">
@@ -58,8 +62,9 @@
               </li>
             </ul>
           </div>
-        </c:if>
-
+      <%
+        }
+      %>
       </div>
     </nav>
 </body>

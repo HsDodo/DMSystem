@@ -1,6 +1,6 @@
 package JAVABEAN;
 
-public class fee {
+public class Fee {
     private String  months;
     private String  dormitoryid;
     private String  electricfee;

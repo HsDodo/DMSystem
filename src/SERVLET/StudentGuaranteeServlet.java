@@ -1,7 +1,7 @@
 package SERVLET;
 
 import DAO.GuaranteeDao;
-import JAVABEAN.guarantee;
+import JAVABEAN.Guarantee;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,7 +24,7 @@ public class StudentGuaranteeServlet extends HttpServlet {
         String goodsname = request.getParameter("goodsname");
         String reason = request.getParameter("reason");
         String phoneid = request.getParameter("phoneid");
-        guarantee guarantee = new guarantee();
+        Guarantee guarantee = new Guarantee();
         guarantee.setDormitoryid(dormitoryid);
         guarantee.setStudentname(studentname);
         guarantee.setGoodsname(goodsname);
@@ -32,7 +32,7 @@ public class StudentGuaranteeServlet extends HttpServlet {
         guarantee.setPhoneid(phoneid);
         guarantee.setId(randomId+"");
         GuaranteeDao guaranteeDao = new GuaranteeDao();
-        ArrayList<guarantee> guarantees = new ArrayList<>();
+        ArrayList<Guarantee> guarantees = new ArrayList<>();
         try {
             guaranteeDao.submit(guarantee);
             guarantees = guaranteeDao.getGuaranteesByDormitoryid(dormitoryid);
@@ -54,9 +54,9 @@ public class StudentGuaranteeServlet extends HttpServlet {
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
-            ArrayList<guarantee> guarantees=(ArrayList<guarantee>) request.getSession().getAttribute("guarantee");
+            ArrayList<Guarantee> guarantees=(ArrayList<Guarantee>) request.getSession().getAttribute("guarantee");
             for(int i=0;i<guarantees.size();i++){
-                guarantee g=guarantees.get(i);
+                Guarantee g=guarantees.get(i);
                 if(g.getId().equals(cancelId)){
                     guarantees.remove(i);
                 }

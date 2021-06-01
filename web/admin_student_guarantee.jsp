@@ -39,42 +39,17 @@
         response.sendRedirect("index.jsp");
     }
 %>
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand text-primary" href="index.jsp">学生宿舍管理系统</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav justify-content-end">
-                <li class="nav-item active">
-                    <a class="navbar-right" href="student_information.jsp">正在登陆的用户为：${sessionScope.dormadminname}(宿管)</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="navbar-right" href="${pageContext.request.contextPath}/LoginOutServlet" onclick="return logout()">退出</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
+<jsp:include page="navbar.jsp"></jsp:include>
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar hidden-xs">
             <ul class="nav nav-sidebar">
                 <li><a href="admin_student_information.jsp">宿舍信息</a></li>
-                <li><a href="admin_student_expess.jsp">快件信息</a></li>
                 <li class="active"><a href="admin_student_guarantee.jsp">维修信息</a></li>
                 <li><a href="admin_student_leavereturn.jsp">学生离校与返校</a></li>
                 <li><a href="admin_student_laterecord.jsp">晚归记录</a></li>
                 <li><a href="admin_student_fee.jsp">水电费信息</a></li>
             </ul>
-        </div>
-        <div class="visible-xs">
-            <li><a href="admin_student_information.jsp">宿舍信息</a></li>
-            <li><a href="admin_student_expess.jsp">快件信息</a></li>
-            <li><a href="admin_student_guarantee.jsp">维修信息</a></li>
-            <li><a href="admin_student_leavereturn.jsp">学生离校与返校</a></li>
-            <li><a href="admin_student_laterecord.jsp">晚归记录</a></li>
-            <li><a href="admin_student_fee.jsp">水电费信息</a></li>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <h2 class="sub-header">维修信息</h2>
@@ -128,32 +103,8 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">报修原因</label>
-                    <div class="col-lg-4">
-                        <input type="text" class="form-control" placeholder="输入报修原因" name="reason">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">报修人电话号码</label>
-                    <div class="col-lg-4">
-                        <input type="text" class="form-control" placeholder="输入报修电话号码" name="phoneid">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">维修时间</label>
-                    <div class="col-lg-4">
-                        <input type="text" class="form-control" placeholder="输入报修时间" name="guaranteetime">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">维修状态</label>
-                    <div class="col-lg-4">
-                        <input type="text" class="form-control" placeholder="输入维修状态" name="guaranteestaus">
-                    </div>
-                </div>
-                <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-default">提交</button>
+                        <button type="submit" class="btn btn-default">维修</button>
                     </div>
                 </div>
             </form>

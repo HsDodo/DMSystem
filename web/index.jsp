@@ -8,7 +8,6 @@
     <title>宿管登陆页面</title>
     <link type="text/css" href="css/signin.css" rel="stylesheet">
 </head>
-
 <body>
 
 <%
@@ -45,7 +44,10 @@
             <input type="hidden" name="login" value="1" />
         </form>
     </div>
+
 </div>
+
+
 
 <script language="JavaScript">
     function check(form,n){

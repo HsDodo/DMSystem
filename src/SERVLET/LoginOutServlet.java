@@ -19,7 +19,6 @@ public class LoginOutServlet extends HttpServlet {
         cookie.setMaxAge(0);
         //把复写的cookie返回给客户端
         response.addCookie(cookie);
-
         response.sendRedirect(request.getContextPath()+"/index.jsp");
     }
 

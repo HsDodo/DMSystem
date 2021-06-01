@@ -1,9 +1,7 @@
 package SERVLET;
 
 import DAO.FeeDao;
-import DAO.LaterecordDao;
-import JAVABEAN.fee;
-import JAVABEAN.laterecord;
+import JAVABEAN.Fee;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,10 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 @WebServlet(name = "AdminExpressServlet")
 public class AdminFeeServlet extends HttpServlet {
@@ -33,7 +28,7 @@ public class AdminFeeServlet extends HttpServlet {
         String waterfee = request.getParameter("waterfee");
         String waternum = request.getParameter("waternum");
 
-        fee fee = new fee();
+        Fee fee = new Fee();
         fee.setMonth(month);
         fee.setDormitoryid(dormitoryid);
         fee.setElectricfee(electricfee);
@@ -42,7 +37,7 @@ public class AdminFeeServlet extends HttpServlet {
         fee.setWaternum(waternum);
 
         FeeDao feeDao = new FeeDao();
-        ArrayList<fee> fees = new ArrayList<>();
+        ArrayList<Fee> fees = new ArrayList<>();
         try {
             if(button.equals("submit"))
             {

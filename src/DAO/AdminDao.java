@@ -9,11 +9,11 @@ import java.sql.SQLException;
 
 public class AdminDao {
     // 根据用户名得到 进行登陆验证
-    public ResultSet selectAdmin(String username) throws SQLException, ClassNotFoundException {
+    public ResultSet getAdmin(String username) throws SQLException, ClassNotFoundException {
         Connection conn = null;
         ResultSet rs = null;
         PreparedStatement pstmt = null;
-        String sql = "select * from dormadmin where username = ?";
+        String sql = "select * from admin where user = ?";
         conn = DBUtils.getConnection();
         pstmt = conn.prepareStatement(sql);
         pstmt.setString(1, username);
@@ -23,14 +23,14 @@ public class AdminDao {
     // 根据用户名得到管理员姓名
     public String getAdminnameByUsername(String username) throws SQLException, ClassNotFoundException {
         Connection  conn = DBUtils.getConnection();
-        String sql = "select * from dormadmin where username = ?";
+        String sql = "select * from admin where user = ?";
         PreparedStatement pstmt = conn.prepareStatement(sql);
         pstmt.setString(1,username);
         ResultSet rs = pstmt.executeQuery();
         String adminname = null;
-        while(rs.next())
+        if(rs.next())
         {
-            adminname = rs.getString("adminname");
+            adminname = rs.getString("adminName");
         }
         return  adminname;
     }

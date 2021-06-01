@@ -1,11 +1,14 @@
 package DAO;
-import JAVABEAN.student;
+import JAVABEAN.Student;
 import JDBC.DBUtils;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class StudentDao {
     // 根据用户名得到 进行登陆验证
@@ -50,8 +53,8 @@ public class StudentDao {
         return studentid;
     }
     // 根据宿舍号返回宿舍成员
-    public ArrayList<student> getStudentsByDormitoryid(String dormitoryid) throws SQLException, ClassNotFoundException {
-        ArrayList<student> students = new ArrayList<>();
+    public ArrayList<Student> getStudentsByDormitoryid(String dormitoryid) throws SQLException, ClassNotFoundException {
+        ArrayList<Student> students = new ArrayList<>();
         Connection conn = DBUtils.getConnection();
         String sql = "select * from student where dormitoryid = ?";
         PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -59,7 +62,7 @@ public class StudentDao {
         ResultSet rs = pstmt.executeQuery();
         while (rs.next())
         {
-            student stu = new student();
+            Student stu = new Student();
             stu.setStudentid(rs.getString("studentid"));
             stu.setStudentname(rs.getString("studentname"));
             stu.setMajor(rs.getString("major"));
@@ -74,16 +77,60 @@ public class StudentDao {
         }
         return  students;
     }
+
+    public List<Student> searchByConditions(Map<String,String> conditions) throws SQLException, ClassNotFoundException {
+        Connection  conn = DBUtils.getConnection();
+        String sql = "select * from student where 1 = 1";
+        for(Map.Entry entry: conditions.entrySet()){
+            if(!entry.getValue().equals("")){
+                sql+=" and "+entry.getKey()+" = ?";
+            }
+        }
+        int i=1;
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+        for(String value: conditions.values()){
+            if(!value.equals("")){
+                pstmt.setString(i++,value);
+            }
+        }
+        List<Student> students =new ArrayList<>();
+        ResultSet rs = pstmt.executeQuery();
+        while (rs.next()) {
+            Student student = new Student();
+            student.setStudentid(rs.getString("studentid"));
+            student.setStudentname(rs.getString("studentname"));
+            student.setGender(rs.getString("gender"));
+            student.setMajor(rs.getString("major"));
+            student.setClasses(rs.getString("classes"));
+            student.setDormitoryid(rs.getString("dormitoryid"));
+            student.setPhoneid(rs.getString("phoneid"));
+            student.setEntrytime(rs.getDate("entrytime"));
+            student.setAge(rs.getInt("age"));
+            student.setPassword(rs.getString("password"));
+            students.add(student);
+        }
+        return students;
+    }
+
+
+
+
+
+
+
+
+
+
     // 返回所有寝室成员
-    public ArrayList<student> getAllStudents() throws SQLException, ClassNotFoundException {
-        ArrayList<student> students = new ArrayList<>();
+    public ArrayList<Student> getAllStudents() throws SQLException, ClassNotFoundException {
+        ArrayList<Student> students = new ArrayList<>();
         Connection conn = DBUtils.getConnection();
         String sql = "select * from student";
         PreparedStatement pstmt = conn.prepareStatement(sql);
         ResultSet rs = pstmt.executeQuery();
         while (rs.next())
         {
-            student stu = new student();
+            Student stu = new Student();
             stu.setStudentid(rs.getString("studentid"));
             stu.setStudentname(rs.getString("studentname"));
             stu.setMajor(rs.getString("major"));
@@ -122,11 +169,11 @@ public class StudentDao {
         return studentname;
     }
     // 根据条件查询得到学生
-    public ArrayList<student> getStudentsByCondition(student stu) throws SQLException, ClassNotFoundException {
+    public ArrayList<Student> getStudentsByCondition(Student stu) throws SQLException, ClassNotFoundException {
         Connection  conn = DBUtils.getConnection();
         String sql = "select * from student where 1 = 1";
         ArrayList<String> parm = new ArrayList<>();
-        ArrayList<student> students = new ArrayList<>();
+        ArrayList<Student> students = new ArrayList<>();
         String studentid = stu.getStudentid();
         String studentname = stu.getStudentname();
         String major = stu.getMajor();
@@ -172,9 +219,8 @@ public class StudentDao {
         }
 
         ResultSet rs = pstmt.executeQuery();
-
         while (rs.next()) {
-            student student = new student();
+            Student student = new Student();
             student.setStudentid(rs.getString("studentid"));
             student.setStudentname(rs.getString("studentname"));
             student.setGender(rs.getString("gender"));

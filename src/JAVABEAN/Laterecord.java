@@ -2,7 +2,7 @@ package JAVABEAN;
 
 import java.util.Date;
 
-public class laterecord {
+public class Laterecord {
     private String studentid;
     private String  studentname;
     private String  dormitoryid;

@@ -1,6 +1,6 @@
 package DAO;
 
-import JAVABEAN.guarantee;
+import JAVABEAN.Guarantee;
 import JDBC.DBUtils;
 
 import java.sql.Connection;
@@ -11,15 +11,15 @@ import java.util.ArrayList;
 
 public class GuaranteeDao {
     // 得到所有报修信息 （管理员）
-    public ArrayList<guarantee> getAllguarantee() throws SQLException, ClassNotFoundException {
-        ArrayList<guarantee> guarantees = new ArrayList<>();
+    public ArrayList<Guarantee> getAllguarantee() throws SQLException, ClassNotFoundException {
+        ArrayList<Guarantee> guarantees = new ArrayList<>();
         Connection conn = DBUtils.getConnection();
         String sql = "select * from guarantee";
         PreparedStatement pstmt = conn.prepareStatement(sql);
         ResultSet rs = pstmt.executeQuery();
         while (rs.next())
         {
-            guarantee guarantee = new guarantee();
+            Guarantee guarantee = new Guarantee();
             guarantee.setId(rs.getString("id"));
             guarantee.setStudentname(rs.getString("studentname"));
             guarantee.setDormitoryid(rs.getString("dormitoryid"));
@@ -33,18 +33,19 @@ public class GuaranteeDao {
         return  guarantees;
     }
     // 修改维修信息
-    public void modify(guarantee guarantee) throws SQLException, ClassNotFoundException {
+    public void modify(Guarantee guarantee) throws SQLException, ClassNotFoundException {
         Connection conn = DBUtils.getConnection();
-        String sql = "update guarantee set guaranteetime = ?, guaranteestaus = ? where dormitoryid = ? and goodsname = ?";
+        String sql = "update guarantee set guaranteetime = ?, guaranteestaus = ? where dormitoryid = ? and goodsname = ? and studentname=?";
         PreparedStatement pstmt = conn.prepareStatement(sql);
         pstmt.setDate(1,new java.sql.Date(guarantee.getGuaranteetime().getTime()) );
         pstmt.setString(2,guarantee.getGuaranteestaus());
         pstmt.setString(3,guarantee.getDormitoryid());
         pstmt.setString(4, guarantee.getGoodsname());
+        pstmt.setString(5,guarantee.getStudentname());
         pstmt.executeUpdate();
     }
-    // 提交修改信息 提交报修信息
-    public void submit(guarantee guarantee) throws SQLException, ClassNotFoundException {
+    // 学生提交修改信息
+    public void submit(Guarantee guarantee) throws SQLException, ClassNotFoundException {
         Connection conn = DBUtils.getConnection();
         String sql = "insert into guarantee(dormitoryid,studentname,goodsname,reason,phoneid,guaranteestaus,id) values(?,?,?,?,?,?,?)";
         PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -59,8 +60,8 @@ public class GuaranteeDao {
     }
 
     // 根据寝室号查询维修信息
-    public ArrayList<guarantee> getGuaranteesByDormitoryid(String dormitoryid) throws SQLException, ClassNotFoundException {
-        ArrayList<guarantee> guarantees = new ArrayList<>();
+    public ArrayList<Guarantee> getGuaranteesByDormitoryid(String dormitoryid) throws SQLException, ClassNotFoundException {
+        ArrayList<Guarantee> guarantees = new ArrayList<>();
         Connection conn = DBUtils.getConnection();
         String sql = "select * from guarantee where dormitoryid = ?";
         PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -68,7 +69,7 @@ public class GuaranteeDao {
         ResultSet rs = pstmt.executeQuery();
         while (rs.next())
         {
-            guarantee guarantee = new guarantee();
+            Guarantee guarantee = new Guarantee();
             guarantee.setId(rs.getString("id"));
             guarantee.setStudentname(rs.getString("studentname"));
             guarantee.setDormitoryid(rs.getString("dormitoryid"));
@@ -90,9 +91,5 @@ public class GuaranteeDao {
         pstmt.setString(1,cancelId);
         return pstmt.executeUpdate()>0;
     }
-
-
-
-
 
 }

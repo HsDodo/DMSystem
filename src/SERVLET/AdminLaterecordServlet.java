@@ -1,6 +1,6 @@
 package SERVLET;
 import DAO.LaterecordDao;
-import JAVABEAN.laterecord;
+import JAVABEAN.Laterecord;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,14 +32,14 @@ public class AdminLaterecordServlet extends HttpServlet {
         }
         String reason = request.getParameter("reason");
 
-        laterecord laterecord = new laterecord();
+        Laterecord laterecord = new Laterecord();
         laterecord.setStudentname(studentname);
         laterecord.setDormitoryid(dormitoryid);
         laterecord.setLatetime(latetime);
         laterecord.setReason(reason);
 
         LaterecordDao laterecordDao = new LaterecordDao();
-        ArrayList<laterecord> laterecords = new ArrayList<>();
+        ArrayList<Laterecord> laterecords = new ArrayList<>();
         try {
             if(button.equals("submit"))
             {

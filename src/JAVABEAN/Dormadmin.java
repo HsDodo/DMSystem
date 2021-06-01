@@ -1,6 +1,6 @@
 package JAVABEAN;
 
-public class dormadmin {
+public class Dormadmin {
     private int dormadminid;
     private String  dormadminname;
     private String  username;

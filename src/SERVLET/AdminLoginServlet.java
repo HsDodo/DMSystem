@@ -23,15 +23,6 @@ public class AdminLoginServlet extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
-        //判断用户名、密码是否为空
-        if(username==""||username.length()==0){
-            request.setAttribute("NAMEMSG","用户名为空!");
-            request.getRequestDispatcher("admin_login.jsp").forward(request, response);
-        }
-        if(password==""||password.length()==0) {
-            request.setAttribute("PWDMSG", "密码为空!");
-            request.getRequestDispatcher("admin_login.jsp").forward(request, response);
-        }
         AdminDao adminDao = new AdminDao();
         StudentDao studentDao = new StudentDao();
         GuaranteeDao guaranteeDao = new GuaranteeDao();
@@ -40,28 +31,27 @@ public class AdminLoginServlet extends HttpServlet {
         FeeDao feeDao = new FeeDao();
         try {
 
-            ResultSet rs = adminDao.selectAdmin(username);
+            ResultSet rs = adminDao.getAdmin(username);
             if(rs.next()){
                 if(password.equals(rs.getString("password"))){
                     //登陆成功
                     //将用户admin存入session域
-                    dormadmin admin = new dormadmin();
-                    admin.setUsername(username);
-                    admin.setPassword(password);
+                    Dormadmin admin = new Dormadmin();
+                    admin.setUsername(username); //设置登录用户名
+                    String dormadminname = adminDao.getAdminnameByUsername(username);
+                    admin.setDormadminname(dormadminname);  //设置管理员姓名
                     request.getSession().setAttribute("dormadmin",admin);
                     // 得到管理员名字
-                    String dormadminname = rs.getString("dormadminname");
                     // 得到所有寝室成员的信息
-                    ArrayList<student> students = studentDao.getAllStudents();
+                    ArrayList<Student> students = studentDao.getAllStudents();
                     // 得到所有维修信息
-                    ArrayList<guarantee> guarantees = guaranteeDao.getAllguarantee();
+                    ArrayList<Guarantee> guarantees = guaranteeDao.getAllguarantee();
                     // 得到所有离校返校信息
-                    ArrayList<leavereturn>  leavereturns = leavereturnDao.getAllLeavereturn();
+                    ArrayList<Leavereturn>  leavereturns = leavereturnDao.getAllLeavereturn();
                     // 得到所有的晚归记录
-                    ArrayList<laterecord>   laterecords = laterecordDao.getAllLaterecords();
+                    ArrayList<Laterecord>   laterecords = laterecordDao.getAllLaterecords();
                     // 得到所有的水电费信息
-                    ArrayList<fee>   fees = feeDao.getAllFee();
-
+                    ArrayList<Fee>   fees = feeDao.getAllFee();
                     request.getSession().setAttribute("admin",username);
                     request.getSession().setAttribute("dormadminname",dormadminname);
                     request.getSession().setAttribute("students",students);
@@ -69,7 +59,6 @@ public class AdminLoginServlet extends HttpServlet {
                     request.getSession().setAttribute("leavereturns",leavereturns);
                     request.getSession().setAttribute("laterecords",laterecords);
                     request.getSession().setAttribute("fees",fees);
-
                     Cookie cookie = new Cookie("SESSION",admin.getUsername());
                     cookie.setMaxAge(24*60*60);
                     cookie.setComment("student");
@@ -82,11 +71,11 @@ public class AdminLoginServlet extends HttpServlet {
 
                 }else{
                     request.setAttribute("PWDERROR","密码不正确!");
-                    request.getRequestDispatcher("admin_login.jsp").forward(request, response);
+                    request.getRequestDispatcher("index.jsp").forward(request, response);
                 }
             }else{
                 request.setAttribute("NAMEERROR","用户名不存在!");
-                request.getRequestDispatcher("admin_login.jsp").forward(request, response);
+                request.getRequestDispatcher("index.jsp").forward(request, response);
             }
 
         } catch (SQLException | ClassNotFoundException throwables) {

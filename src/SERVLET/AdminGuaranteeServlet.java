@@ -1,7 +1,7 @@
 package SERVLET;
 
 import DAO.GuaranteeDao;
-import JAVABEAN.guarantee;
+import JAVABEAN.Guarantee;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,39 +20,26 @@ public class AdminGuaranteeServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setCharacterEncoding("utf-8"); // 设置编码格式
         request.setCharacterEncoding("utf-8");
-
-
         String dormitoryid = request.getParameter("dormitoryid");
         String studentname = request.getParameter("studentname");
         String goodsname = request.getParameter("goodsname");
-        String reason = request.getParameter("reason");
-        String phoneid = request.getParameter("phoneid");
-
         Date guaranteetime = null;
-        try {
-            guaranteetime =new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("guaranteetime"));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        String guaranteestaus = request.getParameter("guaranteestaus");
-
-        guarantee guarantee = new guarantee();
-
+        guaranteetime =new Date();
+        String guaranteestaus = "已维修";
+        Guarantee guarantee = new Guarantee();
         guarantee.setDormitoryid(dormitoryid);
         guarantee.setGoodsname(goodsname);
         guarantee.setGuaranteetime(guaranteetime);
         guarantee.setGuaranteestaus(guaranteestaus);
-
-
+        guarantee.setStudentname(studentname);
         GuaranteeDao guaranteeDao = new GuaranteeDao();
-        ArrayList<guarantee> guarantees = new ArrayList<>();
+        ArrayList<Guarantee> guarantees = new ArrayList<>();
         try {
             guaranteeDao.modify(guarantee);
             guarantees = guaranteeDao.getAllguarantee();
         } catch (SQLException | ClassNotFoundException throwables) {
             throwables.printStackTrace();
         }
-
         request.getSession().setAttribute("guarantees",guarantees);
         request.getRequestDispatcher("admin_student_guarantee.jsp").forward(request,response);
     }

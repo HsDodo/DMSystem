@@ -1,6 +1,6 @@
 package SERVLET;
 import DAO.LeavereturnDao;
-import JAVABEAN.leavereturn;
+import JAVABEAN.Leavereturn;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -33,14 +33,14 @@ public class AdminLeavereturnServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        leavereturn leavereturn = new leavereturn();
+        Leavereturn leavereturn = new Leavereturn();
         leavereturn.setStudentname(studentname);
         leavereturn.setDormitoryid(dormitoryid);
         leavereturn.setLeavetime(leavetime);
         leavereturn.setReturntime(returntime);
 
         LeavereturnDao leavereturnDao = new LeavereturnDao();
-        ArrayList<leavereturn> leavereturns = new ArrayList<>();
+        ArrayList<Leavereturn> leavereturns = new ArrayList<>();
         try {
             if(button.equals("submit"))
             {

@@ -1,8 +1,9 @@
 package JAVABEAN;
 
 import java.util.Date;
+import java.util.Map;
 
-public class student {
+public class Student {
     private String  studentid;
     private String  studentname;
     private int age;
@@ -22,7 +23,6 @@ public class student {
     public void setAge(int age) {
         this.age = age;
     }
-
 
     public String getStudentid() {
         return studentid;

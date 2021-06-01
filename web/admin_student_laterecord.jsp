@@ -41,23 +41,7 @@
         response.sendRedirect("index.jsp");
     }
 %>
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand text-primary" href="index.jsp">学生宿舍管理系统</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav justify-content-end">
-                <li class="nav-item active">
-                    <a class="navbar-right" href="student_information.jsp">正在登陆的用户为：${sessionScope.dormadminname}(宿管)</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="navbar-right" href="${pageContext.request.contextPath}/LoginOutServlet" onclick="return logout()">退出</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
+<jsp:include page="navbar.jsp"></jsp:include>
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar hidden-xs">
@@ -68,13 +52,6 @@
                 <li class="active"><a href="admin_student_laterecord.jsp">晚归记录</a></li>
                 <li><a href="admin_student_fee.jsp">水电费信息</a></li>
             </ul>
-        </div>
-        <div class="visible-xs">
-            <li><a href="admin_student_information.jsp">宿舍信息</a></li>
-            <li><a href="admin_student_guarantee.jsp">维修信息</a></li>
-            <li><a href="admin_student_leavereturn.jsp">学生离校与返校</a></li>
-            <li><a href="admin_student_laterecord.jsp">晚归记录</a></li>
-            <li><a href="admin_student_fee.jsp">水电费信息</a></li>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <h2 class="sub-header">晚归记录</h2>
